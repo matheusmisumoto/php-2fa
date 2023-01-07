@@ -7,7 +7,7 @@ if(!defined('UNLOCK_ACCESS')) { die(); }
 <html lang="pt-br">
     <head>
         <meta charset="utf-8">
-        <title><? echo SETTINGS_SCRIPTNAME .' - '. SUCCESS; ?></title>
+        <title><?php echo SETTINGS_SCRIPTNAME .' - '. SUCCESS_LOGIN; ?></title>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
         <style type="text/css">
             * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -20,10 +20,10 @@ if(!defined('UNLOCK_ACCESS')) { die(); }
     </head>
     <body>
         <header>
-            <h1><? echo SUCCESS_LOGIN; ?></h1>
+            <h1><?php echo SUCCESS_LOGIN; ?></h1>
         </header>
         <footer>
-            <p>Developed by <a href="https://matheusmisumoto.jor.br/" target="_blank">Matheus Misumoto</a></p>
+            <p>Developed by <a href="https://matheusmisumoto.dev/" target="_blank">Matheus Misumoto</a></p>
         </footer>
     </body>
 </html>

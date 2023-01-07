@@ -18,6 +18,7 @@ function registerUser($username, $email, $password){
         if($createFile === FALSE){
             die(ERROR01);
         }
+        fclose($createFile);
     }
 
     $handle[$username] = include (SETTINGS_FILE.".php");
@@ -35,7 +36,6 @@ function registerUser($username, $email, $password){
     // Write the data to file, and unset all variables
     $update = file_put_contents(SETTINGS_FILE.".php",  '<?php if(!defined(\'UNLOCK_ACCESS\')) { die(); } return ' . var_export($register, true) . ';');
     unset($handle, $register, $newUser);
-    fclose(SETTINGS_FILE.".php");
 
     return $update;
 }
@@ -75,7 +75,7 @@ function theVerification($username, $password, $step){
                 file_put_contents(SETTINGS_FILE.".php",  '<?php if(!defined(\'UNLOCK_ACCESS\')) { die(); } return ' . var_export($database, true) . ';');
                 
                 // Check if email was successfully sent
-                if(!$sendMail){
+                if($sendMail == FALSE){
                     // If fails, display a error message on form page
                     $msg = ERROR03;
                     include('form-login.php');

@@ -7,10 +7,6 @@ define('UNLOCK_ACCESS', TRUE);
 require_once 'config.php';
 require_once 'functions.php';
 
-if($_GET['mod'] == 'cadastrar'){
-    registerUser('matheus', 'matheus.japan@gmail.com', 'teste123');
-}
-
 
 // Show the empty form
 if(empty($_POST)){

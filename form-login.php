@@ -7,7 +7,7 @@ if(!defined('UNLOCK_ACCESS')) { die(); }
 <html lang="pt-br">
     <head>
         <meta charset="utf-8">
-        <title><? echo SETTINGS_SCRIPTNAME .' - '. MFA; ?></title>
+        <title><?php echo SETTINGS_SCRIPTNAME .' - '. MFA; ?></title>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         <style type="text/css">
@@ -30,28 +30,28 @@ if(!defined('UNLOCK_ACCESS')) { die(); }
     </head>
     <body>
         <header>
-            <h1><? echo LOGIN; ?></h1>
+            <h1><?php echo LOGIN; ?></h1>
         </header>
 <?php
-    if($msg == true){ ?>
+    if($msg){ ?>
         <section id="error">
-            <p><? echo $msg; ?></p>
+            <p><?php echo $msg; ?></p>
         </section>
-<?
+<?php
     }
 ?>
         <main>
-            <form action="<? echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                <label for="username"><? echo FORM_USERNAME; ?></label>
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <label for="username"><?php echo FORM_USERNAME; ?></label>
                 <input type="text" name="username" id="username">
-                <label for="password"><? echo FORM_PASSWORD; ?></label>
+                <label for="password"><?php echo FORM_PASSWORD; ?></label>
                 <input type="password" name="password" id="password">
-                <div class="g-recaptcha" data-sitekey="<? echo SETTINGS_GOOGLEPUBLICKEY; ?>"></div>
-                <input type="submit" value="<? echo FORM_SUBMIT; ?>">
+                <div class="g-recaptcha" data-sitekey="<?php echo SETTINGS_GOOGLEPUBLICKEY; ?>"></div>
+                <input type="submit" value="<?php echo FORM_SUBMIT; ?>">
             </form>
         </main>
         <footer>
-            <p>Developed by <a href="https://matheusmisumoto.jor.br/" target="_blank">Matheus Misumoto</a></p>
+            <p>Developed by <a href="https://matheusmisumoto.dev/" target="_blank">Matheus Misumoto</a></p>
         </footer>
     </body>
 </html>

@@ -7,36 +7,35 @@ define('UNLOCK_ACCESS', TRUE);
 require_once 'config.php';
 require_once 'functions.php';
 
-if($_POST['action'] == 'resetdb'){
-    // First close the database file, then delete it
-    fclose(SETTINGS_FILE.".php");
-    $deleteFile = unlink(SETTINGS_FILE.".php");
-    if($deleteFile == FALSE){
-        $error = ERROR06;
-    } else {
-        $confirmation = SUCCESS_DELETE;
-    }
-}
-if($_POST['action'] == 'addUser'){
-    if(!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password'])){
-        $addNewUser = registerUser($_POST['username'], $_POST['email'], $_POST['password']);
-        if($addNewUser == FALSE){
-            $error = ERROR07;
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if($_POST['action'] == 'resetdb'){
+        $deleteFile = unlink(SETTINGS_FILE.".php");
+        if($deleteFile == FALSE){
+            $error = ERROR06;
         } else {
-            $confirmation = SUCCESS_NEWUSER;
+            $confirmation = SUCCESS_DELETE;
         }
-    } else {
-        $error = ERROR08;
     }
+    if($_POST['action'] == 'addUser'){
+        if(!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password'])){
+            $addNewUser = registerUser($_POST['username'], $_POST['email'], $_POST['password']);
+            if($addNewUser == FALSE){
+                $error = ERROR07;
+            } else {
+                $confirmation = SUCCESS_NEWUSER;
+            }
+        } else {
+            $error = ERROR08;
+        }
+    }    
 }
-
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <meta charset="utf-8">
-        <title><? echo SETTINGS_SCRIPTNAME .' - '. MFA; ?></title>
+        <title><?php echo SETTINGS_SCRIPTNAME .' - '. MFA; ?></title>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         <style type="text/css">
@@ -62,43 +61,46 @@ if($_POST['action'] == 'addUser'){
     </head>
     <body>
         <header>
-            <h1><? echo SETTINGS; ?></h1>
+            <h1><?php echo SETTINGS; ?></h1>
         </header>
 <?php
-    if($error == true){ ?>
+if ($error) {
+?>
         <section id="error">
-            <p><? echo $error; ?></p>
+            <p><?php echo $error; ?></p>
         </section>
-<?
-    } else if($confirmation == true){ ?>
+<?php
+} 
+else if ($confirmation) {
+?>
         <section id="confirmation">
-            <p><? echo $confirmation; ?></p>
+            <p><?php echo $confirmation; ?></p>
         </section>
-<?
-    }
+<?php
+}
 ?>
 
         <main class="formBox">
-            <form action="<? echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                <label for="username"><? echo FORM_NEWUSERNAME; ?></label>
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <label for="username"><?php echo FORM_NEWUSERNAME; ?></label>
                 <input type="text" name="username" id="username">
-                <label for="email"><? echo FORM_NEWEMAIL; ?></label>
+                <label for="email"><?php echo FORM_NEWEMAIL; ?></label>
                 <input type="email" name="email" id="email">
-                <label for="password"><? echo FORM_NEWPASSWORD; ?></label>
+                <label for="password"><?php echo FORM_NEWPASSWORD; ?></label>
                 <input type="password" name="password" id="password">
                 <input type="hidden" name="action" value="addUser">
-                <input type="submit" value="<? echo FORM_SUBMIT; ?>">
+                <input type="submit" value="<?php echo FORM_SUBMIT; ?>">
             </form>
         </main>
         <section class="formBox">
-            <form action="<? echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                <p><? echo FORM_DELETE; ?></p>
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <p><?php echo FORM_DELETE; ?></p>
                 <input type="hidden" name="action" value="resetdb">
-                <input type="submit" value="<? echo FORM_DELETESUBMIT; ?>" id="redButton">
+                <input type="submit" value="<?php echo FORM_DELETESUBMIT; ?>" id="redButton">
             </form>
         </section>
         <footer>
-            <p>Developed by <a href="https://matheusmisumoto.jor.br/" target="_blank">Matheus Misumoto</a></p>
+            <p>Developed by <a href="https://matheusmisumoto.dev/" target="_blank">Matheus Misumoto</a></p>
         </footer>
     </body>
 </html>

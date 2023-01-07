@@ -7,7 +7,7 @@ if(!defined('UNLOCK_ACCESS')) { die(); }
 <html lang="pt-br">
     <head>
         <meta charset="utf-8">
-        <title><? echo SETTINGS_SCRIPTNAME .' - '. MFA; ?></title>
+        <title><?php echo SETTINGS_SCRIPTNAME .' - '. MFA; ?></title>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
         <style type="text/css">
             * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,26 +29,26 @@ if(!defined('UNLOCK_ACCESS')) { die(); }
     </head>
     <body>
         <header>
-            <h1><? echo MFA; ?></h1>
+            <h1><?php echo MFA; ?></h1>
         </header>
 <?php
     if($msg == true){ ?>
         <section id="error">
-            <p><? echo $msg; ?></p>
+            <p><?php echo $msg; ?></p>
         </section>
-<?
+<?php
     }
 ?>
         <main>
             <form action="" method="POST">
-                <label for="code"><? echo FORM_VERIFICATIONCODE; ?></label>
+                <label for="code"><?php echo FORM_VERIFICATIONCODE; ?></label>
                 <input type="text" name="code" id="code" minlength="6" maxlength="6" required>
-                <input type="hidden" name="username" value="<? echo $_POST['username']; ?>">
-                <input type="submit" value="<? echo FORM_SUBMIT; ?>">
+                <input type="hidden" name="username" value="<?php echo $_POST['username']; ?>">
+                <input type="submit" value="<?php echo FORM_SUBMIT; ?>">
             </form>
         </main>
         <footer>
-            <p>Developed by <a href="https://matheusmisumoto.jor.br/" target="_blank">Matheus Misumoto</a></p>
+            <p>Developed by <a href="https://matheusmisumoto.dev/" target="_blank">Matheus Misumoto</a></p>
         </footer>
     </body>
 </html>
